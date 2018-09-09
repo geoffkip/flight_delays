@@ -8,4 +8,4 @@ Some interesting facts
 2) Southwest airlines had the most flights in 2015.
 3) July seemed to be the busiest month for flights.
 4) Thursday seemed to have the most flights (weird one I thought it would be a weekend day)
-5) The month of July had the most departure and arrival delays.
+5) The month of June had the most departure and arrival delays.
