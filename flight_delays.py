@@ -54,7 +54,7 @@ flights_df['ARRIVAL_DELAY'] = np.where(flights_df['ARRIVAL_DELAY']>0,1,0)
 
 
 # GRAPHS
-#1) Aiports with the most origin flights
+#1) Airports with the most origin flights
 top_ten_origin_airports= flights_df['ORIGIN_AIRPORT'].value_counts()[:10]
 labels = (np.array(top_ten_origin_airports.index))
 fig=plt.figure()
@@ -72,7 +72,8 @@ y_pos=np.arange(len(labels))
 
 fig= plt.figure()
 ax= fig.add_subplot(111)
-ax.bar(labels,top_ten_airlines, align='center',alpha=0.5)
+ax.bar(labels,top_ten_airlines, align='center',color='cyan',alpha=0.5)
+ax.set_facecolor('gray')
 plt.xticks(y_pos, labels,rotation=90)
 plt.ylabel('Flight Counts')
 plt.title('Flight Counts by Airline')
@@ -80,28 +81,28 @@ plt.show()
 
 #3 Flights by month
 month_count= flights_df["MONTH"].value_counts()
-labels=np.array(month_count.index)
-y_pos=np.arange(len(labels))
+month = np.array(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
+y_pos=np.arange(len(month))
 
 fig=plt.figure()
 ax=fig.add_subplot(111)
-ax.bar(labels,month_count,align='center',alpha=0.5,color='green')
+ax.bar(month,month_count,align='center',alpha=0.5,color='green')
 ax.set_facecolor('gray')
-plt.xticks(y_pos, labels,rotation=90)
+plt.xticks(y_pos,month)
 plt.ylabel('Flight Counts')
 plt.title('Flight Counts by Month')
 plt.show()
 
 #4 Flights by day
 day_count= flights_df["DAY_OF_WEEK"].value_counts()
-labels=np.array(day_count.index)
-y_pos=np.arange(len(labels))
+day= np.array(["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"])
+y_pos=np.arange(len(day))
 
 fig=plt.figure()
 ax=fig.add_subplot(111)
-ax.bar(labels,day_count,align='center',alpha=0.5,color='green')
+ax.bar(day,day_count,align='center',alpha=0.5,color='green')
 ax.set_facecolor('gray')
-plt.xticks(y_pos, labels,rotation=90)
+plt.xticks(y_pos, day,rotation=90)
 plt.ylabel('Flight Counts')
 plt.title('Flight Counts by Day')
 plt.show()
@@ -111,8 +112,7 @@ plt.show()
 dep_delay_counts = flights_df.groupby('MONTH').DEPARTURE_DELAY.mean().round(2)
 arr_delay_counts = flights_df.groupby('MONTH').ARRIVAL_DELAY.mean().round(2)
 
-labels=np.array(dep_delay_counts.index)
-y_pos=np.arange(len(labels))
+y_pos=np.arange(len(month))
 
 fig=plt.figure()
 ax=fig.add_subplot(111)
@@ -124,8 +124,8 @@ rect1= ax.bar(y_pos-width/2,dep_delay_counts,align='center',alpha=0.5,color='gre
 rect2= ax.bar(y_pos+width/2,arr_delay_counts,align='center',alpha=0.5,color='red',width=width,label="Arrival Delays")
 ax.set_facecolor('gray')
 ax.legend( (rect1[0], rect2[0]), ('Departure Delays', 'Arrival Delays') )
-plt.xticks(y_pos,labels,rotation=90)
-plt.ylabel('Percentage Delay')
+plt.xticks(y_pos,month,rotation=90)
+plt.ylabel('Percentage Delay %')
 plt.title('Flight Delays by month')
 plt.show()
 
