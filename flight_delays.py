@@ -46,7 +46,10 @@ month = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May',
 day_of_week= {1:'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6:'Saturday', 7:'Sunday'}
 
 flights_df.MONTH = flights_df.MONTH.map(month)
+flights_df["MONTH"]= pd.Categorical(flights_df['MONTH'], categories=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], ordered=True)
 flights_df.DAY_OF_WEEK= flights_df.DAY_OF_WEEK.map(day_of_week)
+flights_df['DAY_OF_WEEK'] = pd.Categorical(flights_df['DAY_OF_WEEK'], categories=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday', 'Sunday'], ordered=True)
+
 
 # Code departure delay and arrival delay fields
 flights_df['DEPARTURE_DELAY'] = np.where(flights_df['DEPARTURE_DELAY']>0,1,0)
@@ -81,6 +84,7 @@ plt.show()
 
 #3 Flights by month
 month_count= flights_df["MONTH"].value_counts()
+month_count = month_count.sort_index()
 month = np.array(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
 y_pos=np.arange(len(month))
 
@@ -95,6 +99,7 @@ plt.show()
 
 #4 Flights by day
 day_count= flights_df["DAY_OF_WEEK"].value_counts()
+day_count = day_count.sort_index()
 day= np.array(["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"])
 y_pos=np.arange(len(day))
 
